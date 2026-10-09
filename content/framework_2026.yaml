@@ -1,0 +1,91 @@
+# Australian Government Impact Analysis Framework (effective 1 July 2026)
+#
+# Structured spec the app reads. Every user-facing statement about the framework
+# should come from here or from retrieved passages of the source documents.
+#
+# STATUS: scaffold. Step names and one-line summaries come from the OIA website
+# step pages (sources below). Detailed requirements, the IA questions as worded
+# in the 2026 Framework, the Self-Assessment Tool criteria and the RBE Tool
+# defaults are filled in once the source PDFs are in reference_docs/oia_2026/.
+# Entries with `verified: false` must not be presented as settled guidance.
+
+meta:
+  title: Australian Government Impact Analysis Framework
+  effective_from: "2026-07-01"
+  administered_by: Office of Impact Analysis (OIA), Department of the Prime Minister and Cabinet
+  sources:
+    framework:
+      title: Australian Government Impact Analysis Framework
+      url: https://oia.pmc.gov.au/sites/default/files/2026-06/impact-analysis-framework.pdf
+      local_file: impact-analysis-framework.pdf
+    practical_guide:
+      title: Impact Analysis Practical Guide for Agencies
+      url: https://oia.pmc.gov.au/sites/default/files/2026-06/impact-analysis-practical-guide.pdf
+      local_file: impact-analysis-practical-guide.pdf
+    framework_web:
+      title: Australian Government Impact Analysis Framework (web)
+      url: https://oia.pmc.gov.au/resources/australian-government-impact-analysis-framework
+
+steps:
+  - id: step1
+    number: 1
+    title: Preliminary analysis
+    summary: >-
+      Assess whether the policy proposal is in scope (regulatory proposals and
+      proposals with material competition impacts). If in scope, assess it
+      against the IA thresholds to determine whether impacts are expected to be
+      moderate or major.
+    app_support: [brief, research, burden]
+    source: framework_web
+    verified: false
+
+  - id: step2
+    number: 2
+    title: Impact analysis
+    summary: >-
+      Evaluate the policy proposal using the IA questions, including estimating
+      the regulatory burden. The product is a Dashboard IA or, where required,
+      a Detailed IA.
+    source_url: https://oia.pmc.gov.au/resources/australian-government-impact-analysis-framework/step-2-impact-analysis
+    app_support: [research, advice, burden, drafts]
+    source: framework_web
+    verified: false
+
+  - id: step3
+    number: 3
+    title: Assess the IA
+    summary: >-
+      The agency assesses whether the IA is sufficient to support the key
+      decision, using the Self-Assessment Tool, and provides a Statement of
+      Sufficiency endorsed by a deputy secretary or equivalent.
+    app_support: [self_assessment]
+    source: framework_web
+    verified: false
+
+  - id: step4
+    number: 4
+    title: Policy decision
+    summary: >-
+      The completed and assessed IA is provided to the decision-maker to inform
+      the key decision.
+    source_url: https://oia.pmc.gov.au/resources/australian-government-impact-analysis-framework/step-4-policy-decision
+    app_support: []
+    source: framework_web
+    verified: false
+
+  - id: step5
+    number: 5
+    title: Publication and reporting
+    summary: >-
+      After the policy is announced, the agency removes confidential material
+      where needed and provides the final IA and Statement of Sufficiency to OIA
+      for publication.
+    app_support: [exports]
+    source: framework_web
+    verified: false
+
+# Filled from the Framework / Practical Guide once available.
+ia_questions: []
+self_assessment_criteria: []
+rbe_defaults: {}
+special_cases: []
