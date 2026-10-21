@@ -3,11 +3,17 @@
 # Structured spec the app reads. Every user-facing statement about the framework
 # should come from here or from retrieved passages of the source documents.
 #
-# STATUS: scaffold. Step names and one-line summaries come from the OIA website
-# step pages (sources below). Detailed requirements, the IA questions as worded
-# in the 2026 Framework, the Self-Assessment Tool criteria and the RBE Tool
-# defaults are filled in once the source PDFs are in reference_docs/oia_2026/.
-# Entries with `verified: false` must not be presented as settled guidance.
+# STATUS: verified against the source documents in reference_docs/oia_2026/:
+#   - Australian Government Impact Analysis Framework (July 2026), 19 pages
+#   - Impact Analysis Practical Guide for Agencies, 25 pages
+#   - Impact Analysis Self-Assessment Tool (version July 2026)
+#   - Regulatory Burden Estimation Tool (version July 2026)
+# Page numbers are the printed page numbers, which match the PDF page index.
+# Quoted text is verbatim except that non-breaking hyphens are written as plain
+# hyphens. Nothing here is drawn from the superseded 2023 guidance.
+#
+# Citations: `source` is a key under meta.sources. PDFs are cited by section and
+# page; workbooks by sheet and cell.
 
 meta:
   title: Australian Government Impact Analysis Framework
@@ -22,6 +28,14 @@ meta:
       title: Impact Analysis Practical Guide for Agencies
       url: https://oia.pmc.gov.au/sites/default/files/2026-06/impact-analysis-practical-guide.pdf
       local_file: impact-analysis-practical-guide.pdf
+    self_assessment_tool:
+      title: Impact Analysis Self-Assessment Tool (version July 2026)
+      url: https://oia.pmc.gov.au/resources/australian-government-impact-analysis-framework
+      local_file: impact-analysis-self-assessment-tool.xlsx
+    rbe_tool:
+      title: Regulatory Burden Estimation Tool (version July 2026)
+      url: https://oia.pmc.gov.au/resources/australian-government-impact-analysis-framework
+      local_file: regulatory-burden-estimation-tool.xlsx
     framework_web:
       title: Australian Government Impact Analysis Framework (web)
       url: https://oia.pmc.gov.au/resources/australian-government-impact-analysis-framework
@@ -31,61 +45,822 @@ steps:
     number: 1
     title: Preliminary analysis
     summary: >-
-      Assess whether the policy proposal is in scope (regulatory proposals and
-      proposals with material competition impacts). If in scope, assess it
-      against the IA thresholds to determine whether impacts are expected to be
-      moderate or major.
+      Assess whether the policy proposal is in scope: any regulatory policy
+      proposal, or any proposal with material competition impacts. If in scope,
+      assess it against the 3 IA thresholds to determine whether it is expected
+      to have moderate or major impacts. An in-scope proposal that meets or
+      exceeds one or more thresholds requires an IA.
     app_support: [brief, research, burden]
-    source: framework_web
-    verified: false
+    source: framework
+    verified: true
+    citations:
+      - {source: framework, section: "Impact analysis steps", page: 8}
+      - {source: framework, section: "Step 1: Preliminary analysis", page: 9, page_end: 11}
+      - {source: practical_guide, section: "Step 1: Preliminary analysis", page: 5, page_end: 10}
 
   - id: step2
     number: 2
     title: Impact analysis
     summary: >-
-      Evaluate the policy proposal using the IA questions, including estimating
-      the regulatory burden. The product is a Dashboard IA or, where required,
-      a Detailed IA.
-    source_url: https://oia.pmc.gov.au/resources/australian-government-impact-analysis-framework/step-2-impact-analysis
+      Evaluate the policy proposal using the 7 IA questions, including
+      estimating the regulatory burden. Prepare a Dashboard IA (around 3 pages,
+      using the OIA template), or a Detailed IA if the Prime Minister or Cabinet
+      requires one or the proposal would introduce a mandatory standard that
+      deviates from existing international standards. A Detailed IA still uses
+      the Dashboard IA template as its executive summary.
     app_support: [research, advice, burden, drafts]
-    source: framework_web
-    verified: false
+    source: framework
+    verified: true
+    citations:
+      - {source: framework, section: "Impact analysis steps", page: 8}
+      - {source: framework, section: "Step 2: Impact analysis", page: 12, page_end: 16}
+      - {source: practical_guide, section: "Step 2: Impact analysis", page: 11, page_end: 12}
 
   - id: step3
     number: 3
     title: Assess the IA
     summary: >-
-      The agency assesses whether the IA is sufficient to support the key
-      decision, using the Self-Assessment Tool, and provides a Statement of
-      Sufficiency endorsed by a deputy secretary or equivalent.
+      The agency assesses whether the IA provides sufficient and robust analysis
+      to inform a key decision. The Self-Assessment Tool can assist. The agency
+      certifies sufficiency through a Statement of Sufficiency confirming the IA
+      addresses the 7 IA questions, including a robust estimate of the
+      regulatory burden, endorsed by a Deputy Secretary (SES Band 3), equivalent,
+      or higher.
     app_support: [self_assessment]
-    source: framework_web
-    verified: false
+    source: framework
+    verified: true
+    citations:
+      - {source: framework, section: "Step 3: Assess the IA", page: 17}
+      - {source: practical_guide, section: "Step 3: Assess the IA", page: 13}
 
   - id: step4
     number: 4
     title: Policy decision
     summary: >-
-      The completed and assessed IA is provided to the decision-maker to inform
-      the key decision.
-    source_url: https://oia.pmc.gov.au/resources/australian-government-impact-analysis-framework/step-4-policy-decision
+      The Dashboard (or Detailed) IA is provided to the decision-maker to
+      support the key decision. Key decisions are not limited to Cabinet: they
+      include decisions by the Prime Minister, ministers, secretaries and agency
+      heads. For a Cabinet submission, the IA must be attached before the
+      coordination final stage.
     app_support: []
-    source: framework_web
-    verified: false
+    source: framework
+    verified: true
+    citations:
+      - {source: framework, section: "Step 4: Policy decision", page: 17}
+      - {source: practical_guide, section: "Step 4: Policy decision", page: 14, page_end: 15}
 
   - id: step5
     number: 5
     title: Publication and reporting
     summary: >-
-      After the policy is announced, the agency removes confidential material
-      where needed and provides the final IA and Statement of Sufficiency to OIA
-      for publication.
+      After the policy is announced, the IA provided to the decision-maker for
+      the final key decision is reviewed to remove confidential information and
+      published on the OIA website with the Statement of Sufficiency, as soon as
+      possible and within five working days. The IA must also be attached to any
+      Explanatory Memorandum or Explanatory Statement. Agencies report to the OIA
+      quarterly on ongoing and outstanding IAs.
     app_support: [exports]
-    source: framework_web
-    verified: false
+    source: framework
+    verified: true
+    citations:
+      - {source: framework, section: "Step 5: Publication and Reporting", page: 17}
+      - {source: practical_guide, section: "Step 5: Publication and reporting", page: 16, page_end: 20}
 
-# Filled from the Framework / Practical Guide once available.
-ia_questions: []
-self_assessment_criteria: []
-rbe_defaults: {}
-special_cases: []
+scope:
+  in_scope:
+    - id: regulatory
+      title: Regulatory policy proposals
+      text: >-
+        Any proposal to establish or reform government rules that set requirements.
+        This includes quasi-regulations, such as industry-government agreements
+        (co-regulation), which influence the behaviour of people, businesses, or
+        community organisations.
+      citation: {source: framework, section: "1.2. What policy proposals are in scope?", page: 9}
+    - id: competition
+      title: Proposals with material competition impacts
+      text: >-
+        Any proposal expected to have a material (positive or negative) impact on
+        competition in a market.
+      citation: {source: framework, section: "1.2. What policy proposals are in scope?", page: 9}
+  not_required: >-
+    Routine indexation, administrative and machinery changes are not within the
+    scope of the framework and do not require an IA.
+  not_required_citation: {source: practical_guide, section: "Are there any exemptions from scope?", page: 10}
+
+ia_thresholds:
+  - id: threshold1
+    number: 1
+    title: Regulatory burden
+    text: >-
+      Proposals likely to change regulatory burden by $20 million or more in total
+      (over 10 years).
+    citations:
+      - {source: framework, section: "1.3. In-scope proposals must also meet the IA thresholds", page: 10}
+      - {source: practical_guide, section: "Preliminary analysis of regulatory burden (IA threshold 1)", page: 7}
+  - id: threshold2
+    number: 2
+    title: Material impacts
+    text: >-
+      Proposals likely to have indicative impacts of $200 million or more annually
+      on the economic and social outcomes for people, businesses, or community
+      organisations.
+    citations:
+      - {source: framework, section: "1.3. In-scope proposals must also meet the IA thresholds", page: 10}
+      - {source: practical_guide, section: "Preliminary analysis of material economic and social impacts (IA threshold 2)", page: 8, page_end: 9}
+  - id: threshold3
+    number: 3
+    title: Distributional impacts
+    text: >-
+      Proposals likely to disproportionately and significantly impact a cohort,
+      including small businesses, where no other impact assessment applies.
+    citations:
+      - {source: framework, section: "1.3. In-scope proposals must also meet the IA thresholds", page: 10}
+      - {source: practical_guide, section: "Preliminary analysis of distributional impacts (IA threshold 3)", page: 9}
+
+# The 7 IA questions, worded exactly as in the Framework (section 2.3).
+ia_questions:
+  - id: q1
+    number: 1
+    short_title: policy problem
+    question: What is the policy problem and what data are available?
+    prompts:
+      - Clearly identify and define the policy problem.
+      - Provide evidence to demonstrate why it is a problem, the magnitude of the problem and the impacts of not doing anything.
+      - Describe the people, businesses or community organisations affected by the problem.
+      - Explain which, if any, current government policies have sought to address the problem, and if and why those policies are not sufficiently addressing the policy problem.
+      - Identify available information and data and consider how to close any gaps that need to be addressed as part of the IA process.
+    citation: {source: framework, section: "2.3. The 7 IA questions", page: 14}
+
+  - id: q2
+    number: 2
+    short_title: policy objective
+    question: What are the policy objectives, why is government intervention needed to achieve them, and how will success be measured?
+    prompts:
+      - Establish the policy rationale for government to intervene, including demonstrating that the government could intervene successfully.
+      - Clearly identify the policy objectives and intended outcomes.
+      - Identify any barriers to achieving the policy objective.
+      - Outline what factors will make this policy change a success and include measurable targets.
+    citation: {source: framework, section: "2.3. The 7 IA questions", page: 14}
+
+  - id: q3
+    number: 3
+    short_title: policy options
+    question: What policy options are being considered?
+    prompts:
+      - Identify genuine and viable alternative policy options, including the status quo and at least one non-regulatory alternative policy option (unless it can be demonstrated that a non-regulatory option is not viable).
+      - Demonstrate these policy options can achieve the policy objectives.
+      - Identify the context for the options considered (for example, the policy proposal may be an election commitment).
+    citation: {source: framework, section: "2.3. The 7 IA questions", page: 14}
+
+  - id: q4
+    number: 4
+    short_title: net benefit
+    question: What is the likely net benefit of the option?
+    prompts:
+      - Provide an estimate of the net benefit of each policy option. Where a monetised net benefit cannot be estimated, provide an explanation why this has not been possible (including identifying data and information gaps) and provide qualitative analysis of impacts. This analysis should also draw on evidence from stakeholder engagement and existing evaluations.
+      - Identify who is likely to be affected by each policy option. Where significant, assess the economic, competition, social, environmental or other impacts as well as how those impacts are likely to be distributed.
+      - Assess the regulatory burden impacts for people, businesses, organisations or the community using the Regulatory Burden Measurement Framework.
+      - Provide analysis of impacts based on cost-benefit analysis and other analysis to quantify impacts where possible. Describe the method, assumptions and sensitivity testing used to conduct the analysis.
+      - Provide information on any applicable international standards and whether the policy proposal differs from or adopts those standards.
+    citation: {source: framework, section: "2.3. The 7 IA questions", page: 15}
+
+  - id: q5
+    number: 5
+    short_title: consultation
+    question: What consultation was undertaken and how was feedback incorporated into the policy design?
+    prompts:
+      - Explain the purpose and objectives of consultation and outline the process of consultation.
+      - Summarise the key feedback from stakeholders, including the areas of agreement as well as areas of difference.
+      - Describe where the policy option(s) has been modified to account for stakeholder feedback, and where and why stakeholder feedback has not been adopted.
+      - Consider alternative consultation approaches where the policy proposal is market sensitive, public consultation may compromise the policy, or where key affected stakeholders may require a different consultation approach.
+    citation: {source: framework, section: "2.3. The 7 IA questions", page: 15}
+
+  - id: q6
+    number: 6
+    short_title: implementation
+    question: What is the best policy option and how will it be implemented?
+    prompts:
+      - Indicate the most appropriate policy option to achieve the identified policy objective (question 2) and the reason. Summarise the supporting analysis and clearly outline any caveats or qualifications, and assumptions.
+      - "Explain how this policy option will be implemented. Assess implementation challenges and risks: their likelihood, consequences and management. Outline any transitional arrangements and an implementation approach."
+      - Build on IA question 1, develop a plan to close any relevant data gaps during implementation to support successful monitoring and evaluation of the policy.
+    citation: {source: framework, section: "2.3. The 7 IA questions", page: 16}
+
+  - id: q7
+    number: 7
+    short_title: evaluation
+    question: How will the policy be monitored and evaluated?
+    prompts:
+      - Describe the monitoring activities you will undertake to ensure successful implementation. Specify if a formal evaluation will be conducted and, if not, provide a rationale for not doing so.
+      - text: "If a formal evaluation will be conducted:"
+        items:
+          - state when a monitoring and evaluation plan, consistent with Commonwealth Evaluation Policy, will be finalised
+          - provide a tentative date for completion of the evaluation
+          - "state the type of evaluation that is proposed: process evaluation, outcome/impact evaluation and/or economic evaluation"
+          - prepare draft key evaluation questions that relate to the policy objective and success metrics set out in IA question 2
+          - consider undertaking an initial data needs assessment (that is, what data is needed, what data is already available, and what extra data might need to be collected)
+          - consider including a draft theory of change.
+    note: Refer to guidance by the Australian Centre for Evaluation.
+    citation: {source: framework, section: "2.3. The 7 IA questions", page: 16}
+
+# Scoring rules from the Self-Assessment Tool summary table (sheet
+# "2. Self-Assessment tool", rows 4-12). Each criterion is rated Not completed,
+# Adequate practice or Best practice. An alert shows for a question when fewer
+# than `alert_below` criteria are rated adequate or best practice.
+self_assessment_scoring:
+  ratings: [Not completed, Adequate practice, Best practice]
+  note: >-
+    Please Note: This is a self assessment tool that is to be used as an internal
+    guide by agencies. All judgements as to quality of analysis is a judgement by
+    the responsible agency.
+  question_labels:
+    1: Q1  Problem
+    2: Q2  Why Government Action
+    3: Q3  Options
+    4: Q4  Impacts
+    5: Q5  Consultation
+    6: Q6  Best Option
+    7: Q7  Evaluation
+  alert_below: {1: 5, 2: 4, 3: 3, 4: 5, 5: 4, 6: 3, 7: 2}
+  question_alert_text: Sub Question missed or Not Completed
+  total_alert_below: 25
+  total_alert_text: Address Missed or 'Not Completed' questions
+  citation: {source: self_assessment_tool, section: "2. Self-Assessment tool", location: "summary table A4:F12"}
+  workbook_notes:
+    - >-
+      The workbook has 26 criteria, but the total alert fires only when fewer
+      than 25 are rated adequate or best practice (cell E12), so one criterion
+      can be missed without a total alert. The per-question alerts still catch it.
+    - >-
+      The best practice description for the third Q3 criterion (row 31) refers to
+      flow-on and distributional costs and benefits rather than the context for
+      the options. It is reproduced as written.
+    - >-
+      Both Q7 criteria (rows 52 and 53) share the same best practice description.
+
+# Self-Assessment Tool criteria, verbatim from sheet "2. Self-Assessment tool".
+# The criterion text matches the Framework IA question prompts, except q6_3 which
+# reads "Building on IA question 1" where the Framework has "Build on".
+self_assessment_criteria:
+  - id: q1_1
+    question: 1
+    criterion: Clearly identify and define the policy problem.
+    adequate_practice: Defined the problem in general terms.
+    best_practice: Defined the problem by identifying who, what, when, where and how.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 16 (A16, E16, G16)
+  - id: q1_2
+    question: 1
+    criterion: Provide evidence to demonstrate why it is a problem, the magnitude of the problem
+      and the impacts of not doing anything.
+    adequate_practice: Described the causes and consequences of the problem.
+    best_practice: Described and demonstrated the causes and consequences of the problem, including
+      the consequences of inaction.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 17 (A17, E17, G17)
+  - id: q1_3
+    question: 1
+    criterion: Describe the people, businesses or community organisations affected by the problem.
+    adequate_practice: Described affected stakeholders and organised into cohorts (industry/peer
+      bodies/individuals etc.).
+    best_practice: Described affected stakeholders and quantified impacts specific to each cohort.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 18 (A18, E18, G18)
+  - id: q1_4
+    question: 1
+    criterion: Explain which, if any, current government policies have sought to address the
+      problem, and if and why those policies are not sufficiently addressing the policy problem.
+    adequate_practice: Explained how existing measures have sought to address the problem.
+    best_practice: Demonstrated that changes in implementation  (e.g. increased enforcement)
+      will not sufficiently address the problem.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 19 (A19, E19, G19)
+  - id: q1_5
+    question: 1
+    criterion: Identify available information and data and consider how to close any gaps that
+      need to be addressed as part of the IA process.
+    adequate_practice: Described available data, assessed its quality, identified data gaps,
+      and why there are gaps.
+    best_practice: Identified available data, assessed its quality, identified data gaps, why
+      there are gaps and discussed the impact of the gaps on certainty in the analysis.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 20 (A20, E20, G20)
+  - id: q2_1
+    question: 2
+    criterion: Establish the policy rationale for government to intervene, including demonstrating
+      that the government could intervene successfully.
+    adequate_practice: Explained sound reason(s) why government should intervene.
+    best_practice: Justified direct government intervention with substantiated evidence.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 23 (A23, E23, G23)
+  - id: q2_2
+    question: 2
+    criterion: Clearly identify the policy objectives and intended outcomes.
+    adequate_practice: Identified objectives that address the policy problem.
+    best_practice: Developed objectives or targets which are Specific, Measurable, Achievable,
+      Relevant and Time-bound (SMART).
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 24 (A24, E24, G24)
+  - id: q2_3
+    question: 2
+    criterion: Identify any barriers to achieving the policy objective.
+    adequate_practice: Described the barriers or constraints to government action.
+    best_practice: Described the barriers or constraints to government action and explained
+      the actions to overcome the barriers or constraints.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 25 (A25, E25, G25)
+  - id: q2_4
+    question: 2
+    criterion: Outline what factors will make this policy change a success and include measurable
+      targets.
+    adequate_practice: Described success factors/key assumptions.
+    best_practice: Explained success factors/key assumptions, their relative importance and
+      likelihood.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 26 (A26, E26, G26)
+  - id: q3_1
+    question: 3
+    criterion: Identify genuine and viable alternative policy options, including the status
+      quo and at least one non-regulatory alternative policy option (unless it can be demonstrated
+      that a non-regulatory option is not viable).
+    adequate_practice: Presented a range of alternative policy options.
+    best_practice: Justified the viability of a range of alternative policy options and discussed
+      discarded options.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 29 (A29, E29, G29)
+  - id: q3_2
+    question: 3
+    criterion: Demonstrate these policy options can achieve the policy objectives.
+    adequate_practice: Explained how each option will address the problem.
+    best_practice: Demonstrated how each option will achieve the stated policy objectives and
+      its limitations.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 30 (A30, E30, G30)
+  - id: q3_3
+    question: 3
+    criterion: Identify the context for the options considered (for example, the policy proposal
+      may be an election commitment).
+    adequate_practice: Provided some context for all options brought forward.
+    best_practice: Analysed flow-on and distributional costs and benefits commensurate to the
+      magnitude of the policy option(s).
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 31 (A31, E31, G31)
+  - id: q4_1
+    question: 4
+    criterion: Provide an estimate of the net benefit of each policy option. Where a monetised
+      net benefit cannot be estimated, provide an explanation why this has not been possible
+      (including identifying data and information gaps) and provide qualitative analysis of
+      impacts. This analysis should also draw on evidence from stakeholder engagement and existing
+      evaluations.
+    adequate_practice: Provided a net benefit assessment of each option by describing the costings
+      used / describing the constraints underlying the lack of quantifiable data.
+    best_practice: Provided a net benefit assessment of each option justifying the costings
+      used / justifying the constraints underlying the lack of quantifiable data.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 34 (A34, E34, G34)
+  - id: q4_2
+    question: 4
+    criterion: Identify who is likely to be affected by each policy option. Where significant,
+      assess the economic, competition, social, environmental or other impacts as well as how
+      those impacts are likely to be distributed.
+    adequate_practice: Described how stakeholder(s) are likely to be affected by each option.
+    best_practice: Explained how stakeholder(s) are affected with substantiated evidence, including
+      distributional impacts.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 35 (A35, E35, G35)
+  - id: q4_3
+    question: 4
+    criterion: Assess the regulatory burden impacts for people, businesses, organisations or
+      the community using the Regulatory Burden Measurement Framework.
+    adequate_practice: Provided a regulatory burden estimate using default work-related and
+      non-work-related labour rates.
+    best_practice: Provided a regulatory burden estimate using tailored bespoke data collected
+      from consultation, such as on work-related and non-work-related labour rates or time taken
+      to complete tasks.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 36 (A36, E36, G36)
+  - id: q4_4
+    question: 4
+    criterion: Provide analysis of impacts based on cost-benefit analysis and other analysis
+      to quantify impacts where possible. Describe the method, assumptions and sensitivity testing
+      used to conduct the analysis.
+    adequate_practice: Described method being used to identify the option with the highest net
+      benefit, including a clear rationale for why that was selected as the preferred method.
+    best_practice: Described the method being used to identify the option with the highest net
+      benefit, including a clear rationale for why that is the preferred method and providing
+      a clear 'decision rule' for identifying the best option.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 37 (A37, E37, G37)
+  - id: q4_5
+    question: 4
+    criterion: Provide information on any applicable international standards and whether the
+      policy proposal differs from or adopts those standards.
+    adequate_practice: Described Australia's obligations associated with the relevant international
+      standard and lessons from other countries' implementation of the standard.
+    best_practice: Provided in-depth context, quantification of impacts, and justification for
+      all options concerning standards brought forward in terms of how and why they differ from
+      international standards.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 38 (A38, E38, G38)
+  - id: q5_1
+    question: 5
+    criterion: Explain the purpose and objectives of consultation and outline the process of
+      consultation.
+    adequate_practice: Explained the purpose of consultation for this proposal.
+    best_practice: Explained the importance of consultation to help shape options and/or understand
+      of the impacts.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 41 (A41, E41, G41)
+  - id: q5_2
+    question: 5
+    criterion: Summarise the key feedback from stakeholders, including the areas of agreement
+      as well as areas of difference.
+    adequate_practice: Summarised feedback from stakeholders and consultation process.
+    best_practice: Summarised feedback was informative and detailed, and consultation was fit-for-purpose
+      and took into account the needs of each stakeholder group. Included critical evaluation
+      of the consultation process taking into account limitations, barriers and/or further opportunities.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 42 (A42, E42, G42)
+  - id: q5_3
+    question: 5
+    criterion: Describe where the policy option(s) has been modified to account for stakeholder
+      feedback, and where and why stakeholder feedback has not been adopted.
+    adequate_practice: Acknowledged dissenting stakeholder views.
+    best_practice: Explained how stakeholder view(s) have shaped the options and/or informed
+      the impact analysis.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 43 (A43, E43, G43)
+  - id: q5_4
+    question: 5
+    criterion: Consider alternative consultation approaches where the policy proposal is market
+      sensitive, public consultation may compromise the policy, or where key affected stakeholders
+      may require a different consultation approach.
+    adequate_practice: Considered different consultation approaches and chose appropriately.
+    best_practice: Explained why a consultation approach was adopted addressing any  sensitivity
+      of the issues, market considerations and how this avoided triggering needless concerns,
+      confusion or other unintended consequences.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 44 (A44, E44, G44)
+  - id: q6_1
+    question: 6
+    criterion: Indicate the most appropriate policy option to achieve the identified policy
+      objective (question 2) and the reason. Summarise the supporting analysis and clearly outline
+      any caveats or qualifications, and assumptions.
+    adequate_practice: Identified the preferred option based on specified criteria and general
+      discussion on the extent to which each option will achieve each of the stated objectives.
+    best_practice: Identified the preferred option based on the application of a clear decision
+      rule that includes 'net benefit' and provided structured assessment of the extent to which
+      each policy option will achieve each of the stated objectives.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 47 (A47, E47, G47)
+  - id: q6_2
+    question: 6
+    criterion: 'Explain how this policy option will be implemented. Assess implementation challenges
+      and risks: their likelihood, consequences and management. Outline any transitional arrangements
+      and an implementation approach.'
+    adequate_practice: Identified key milestones of implementation. Provided an implementation
+      plan.
+    best_practice: Identified key milestones of implementation, including responsibilities/governance
+      arrangements. Provided an implementation plan that discusses challenges and implementation
+      risks.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 48 (A48, E48, G48)
+  - id: q6_3
+    question: 6
+    criterion: Building on IA question 1, develop a plan to close any relevant data gaps during
+      implementation to support successful monitoring and evaluation of the policy.
+    adequate_practice: Developed a plan to identify data gaps.
+    best_practice: Identified and described where the data gaps exist, the impact of the gaps
+      on policy development and the confidence level of the options and analysis presented,
+      and how data gaps will be filled or managed during implementation.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 49 (A49, E49, G49)
+  - id: q7_1
+    question: 7
+    criterion: Describe the monitoring activities you will undertake to ensure successful implementation.
+      Specify if a formal evaluation will be conducted and, if not, provide a rationale for
+      not doing so.
+    adequate_practice: Listed evaluation questions and/or objective and identified method used
+      for evaluations with links to objectives of the policy.
+    best_practice: Detailed evaluation questions and/or objectives based on IA content, clear
+      theory of change and consultation with impacted stakeholders and detailed method used
+      for evaluation based on structured assessment of method options and consideration of ethical
+      and cultural considerations.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 52 (A52, E52, G52)
+  - id: q7_2
+    question: 7
+    criterion: |-
+      If a formal evaluation will be conducted:
+      − state when a monitoring and evaluation plan, consistent with
+      Commonwealth Evaluation Policy, will be finalised
+      − provide a tentative date for completion of the evaluation
+      − state the type of evaluation that is proposed: process evaluation, outcome/impact evaluation and/or economic evaluation
+      − prepare draft key evaluation questions that relate to the policy objective and success metrics set out in IA question 2
+      − consider undertaking an initial data needs assessment (that is, what data is needed, what data is already available, and what extra data might need to be collected)
+      − consider including a draft theory of change.
+    adequate_practice: Consulted Australian Centre for Evaluation (ACE) and/or considered ACE
+      guidance.
+    best_practice: Detailed evaluation questions and/or objectives based on IA content, clear
+      theory of change and consultation with impacted stakeholders and detailed method used
+      for evaluation based on structured assessment of method options and consideration of ethical
+      and cultural considerations.
+    citation:
+      source: self_assessment_tool
+      section: 2. Self-Assessment tool
+      location: row 53 (A53, E53, G53)
+  
+
+# Defaults and method from the Regulatory Burden Estimation Tool (version July
+# 2026), which applies the Regulatory Burden Measurement Framework.
+rbe_defaults:
+  tool_version: July 2026
+  measurement_framework: Regulatory Burden Measurement Framework
+  purpose: >-
+    This workbook estimates the change in regulatory cost burden imposed on
+    affected entities by a policy by applying the Australian Government's
+    Regulatory Burden Measurement Framework (RMBF). It covers administrative
+    compliance, substantive compliance and delay costs. Note that this tool
+    evaluates both positive and negative changes in regulatory burden.
+  purpose_citation: {source: rbe_tool, section: "1.Instructions", location: A4}
+  general_settings:
+    - id: entities
+      label: Number of entities affected
+      default: null
+      required: true
+      guidance: The number of entities impacted
+      citation: {source: rbe_tool, section: "2. Calculator", location: A7:D7}
+    - id: people_per_entity
+      label: Number of people per entity with new obligations
+      default: 1
+      guidance: Number of staff at each entity who will perform new obligations
+      citation: {source: rbe_tool, section: "2. Calculator", location: A8:D8}
+    - id: work_labour_rate
+      label: Work-related labour rate ($/hr), from RBMF
+      default: 91.54
+      unit: AUD per hour
+      guidance: Hourly cost of a worker (incl. overheads)
+      citation: {source: rbe_tool, section: "2. Calculator", location: A9:D9}
+    - id: non_work_labour_rate
+      label: Non-work related labour rate ($/hr), from RBMF
+      default: 41
+      unit: AUD per hour
+      guidance: Cost of personal time (e.g. householder filling out forms)
+      citation: {source: rbe_tool, section: "2. Calculator", location: A10:D10}
+    - id: period_years
+      label: Period of analysis (years)
+      default: 10
+      unit: years
+      guidance: How many years to project costs (default 10)
+      citation: {source: rbe_tool, section: "2. Calculator", location: A11:D11}
+  cost_categories:
+    - id: administrative_compliance
+      title: Administrative Compliance
+      description: "Staff time costs: record-keeping, internal processes."
+      stated_formula: "Setup Hours (one-off) + Ongoing Hours × Frequency × Labour Rate × Entities × Staff."
+      inputs: [Description of Cost, Setup Hours (one-off), Ongoing Hours (per occasion), Frequency (times/yr), Cost Type (Work-related or Non-work-related)]
+      citation: {source: rbe_tool, section: "1.Instructions", location: A10}
+    - id: substantive_compliance
+      title: Substantive Compliance
+      description: "Purchased services or equipment/products: audits, legal advice, software, consultants."
+      stated_formula: "One-off purchase + Recurring cost × Frequency × Entities."
+      inputs: [Description of Cost, One-off Cost ($), Recurring Cost ($), Times cost applies/yr]
+      citation: {source: rbe_tool, section: "1.Instructions", location: A11}
+    - id: delay
+      title: Delay Costs
+      description: >-
+        Costs from regulatory processing delays: standby expenses + lost income,
+        multiplied by days of delay × number of entities. Contact OIA if delay
+        costs are in proposal.
+      inputs: [Description of Cost, Income lost per day of delay ($), Length of delay (days), Recurrence of delays (times/yr), One-off delay (Yes/No)]
+      citation: {source: rbe_tool, section: "1.Instructions", location: A12}
+  initial_cost: >-
+    Initial Cost (Year 1): Includes one-off setup/upfront costs PLUS the first
+    year of recurring operating costs. This is the total cost in the first year.
+  ongoing_cost: >-
+    Ongoing Cost (Year 2+): Just the recurring annual operating costs — no setup
+    costs. This repeats each year from Year 2 onward.
+  initial_ongoing_citation: {source: rbe_tool, section: "1.Instructions", location: A14:A15}
+  aggregation:
+    horizon_years: 10
+    discounting: none
+    method: >-
+      Year 1 is the initial cost; years 2 to 10 each take the ongoing cost. The
+      10-year total is the undiscounted sum of the 10 years. The annual average
+      is the 10-year total divided by 10.
+    outputs:
+      - label: 10 Year Total (For Dashboard, $M)
+        formula: "=SUM(B4:B6)/1000000"
+      - label: Annual Average over 10 years (For Preliminary Analysis, $M)
+        formula: "=B9/10"
+    citation: {source: rbe_tool, section: "3. Estimates", location: A3:L10}
+  reporting_requirement: >-
+    The Regulatory Burden Measurement Framework outlines that agencies must
+    provide the final regulatory burden estimate as a point estimate of the
+    average annual change in regulatory burden over 10 years (without
+    discounting).
+  reporting_citation: {source: practical_guide, section: "Step 2: Impact analysis - General approach", page: 11}
+  threshold_comparison: >-
+    IA threshold 1 is a change in regulatory burden of $20 million or more in
+    total over 10 years, so the 10-year total is compared with the threshold.
+  threshold_citation: {source: framework, section: "1.3. In-scope proposals must also meet the IA thresholds", page: 10}
+  # Points where the workbook formulas differ from its own instructions. Record
+  # these so the app's calculator can be checked against the workbook.
+  workbook_formula_notes:
+    - >-
+      Administrative compliance, Initial Cost (I29:I33) is Setup Hours × Labour
+      Rate × Entities. It does not include the first year of ongoing costs or
+      the staff-per-entity multiplier, although the instructions say Year 1
+      includes the first year of recurring costs.
+    - >-
+      Substantive compliance, Initial Cost (F40:F44) is One-off Cost × Entities.
+      It does not include the first year of recurring costs.
+    - >-
+      Delay costs, Initial Cost (G51:G55) is Income lost per day × Entities ×
+      Recurrence, with no length of delay. Ongoing Cost (H51:H55) is Length of
+      delay × Recurrence × Entities, with no income lost per day.
+    - >-
+      The Estimates sheet always projects 10 years (C:L) and divides by 10,
+      whatever is entered as the Period of analysis.
+  worked_examples:
+    - id: example_a
+      title: New data collection and reporting requirements for Exampalium wholesalers
+      answer: "$3.63 MILLION (=110*22*150*10)"
+      ten_year_total: 3630000
+      citation: {source: rbe_tool, section: "5. Examples", location: A6:A12}
+    - id: example_b
+      title: New Certification Requirement for Example Centre Staff
+      answer: "$9.61 MILLION (=15000*4*91.54+15000*1*91.54*3)"
+      ten_year_total: 9611700
+      citation: {source: rbe_tool, section: "5. Examples", location: A14:A19}
+    - id: example_c
+      title: Streamlined Examplemental approval requirement for new developments
+      answer: "$19.87 MILLION (=9*((35-19)*13800)*10)"
+      ten_year_total: 19872000
+      citation: {source: rbe_tool, section: "5. Examples", location: A21:A26}
+    - id: example_d
+      title: New cyber security requirements for medium and large Exampalium retailers
+      answer: "$54.21 MILLION (=30000*800+30000*2*91.54+30000*1*91.54*9)"
+      ten_year_total: 54208200
+      citation: {source: rbe_tool, section: "5. Examples", location: A28:A34}
+
+special_cases:
+  - id: pm_exemption
+    title: Prime Minister's exemptions
+    summary: >-
+      The Prime Minister can exempt the need to complete an IA in limited
+      circumstances: truly urgent and unforeseen events requiring a decision
+      before an IA can be undertaken, or a matter of budget or other sensitivity
+      where developing an IA could compromise confidentiality and cause
+      unintended market effects or speculative behaviour.
+    requirements:
+      - When the decision is announced, the agency notifies the OIA that the proposal was subject to a Prime Minister's exemption and the reason; the OIA website notes it.
+      - The exemption must be noted in any relevant Explanatory Memorandum or Explanatory Statement.
+    citations:
+      - {source: framework, section: "Special cases - Prime Minister's exemptions", page: 18}
+      - {source: practical_guide, section: "Publishing Prime Minister's exemptions", page: 17}
+
+  - id: ia_equivalent
+    title: Reviews and Impact Analysis Equivalent
+    summary: >-
+      Where a review or other existing analysis (such as a policy white paper,
+      royal commission report or Productivity Commission report) substantially
+      addresses the IA questions, agencies can draw on it and summarise it in the
+      Dashboard IA. Where a Detailed IA has been required, agencies may certify
+      that a review has undertaken an equivalent process and substantially
+      addressed the 7 IA questions.
+    requirements:
+      - Summarise the analysis and findings in a Dashboard IA.
+      - Where the review does not fully address the 7 IA questions, undertake proportionate supplementary analysis to fill the gaps, including a regulatory burden estimate.
+      - Publish the review together with the Dashboard IA.
+      - The Statement of Sufficiency should note that the review addresses the 7 IA questions and identify gaps addressed in the Dashboard IA.
+    citations:
+      - {source: framework, section: "Special cases - Reviews and impact analysis equivalent", page: 18}
+      - {source: practical_guide, section: "Statement of Sufficiency", page: 13}
+
+  - id: election_commitment
+    title: Election commitments
+    summary: >-
+      IAs covering matters which were the subject of an election commitment will
+      not be required to consider an alternative policy option. Only the specific
+      election commitment relative to the status quo needs to be considered as
+      part of the IA.
+    requirements: []
+    citations:
+      - {source: framework, section: "Special cases - Election commitments", page: 19}
+
+  - id: sunsetting
+    title: Sunsetting legislative instruments
+    summary: >-
+      When remaking a sunsetting legislative instrument, assess it against the
+      IA scope and thresholds and, if required, prepare and publish a Dashboard
+      IA. The status quo assumes the instrument would sunset (no instrument in
+      place). Allowing an instrument to sunset has no IA requirement.
+    requirements:
+      - Notify the OIA when a sunsetting instrument requiring a Dashboard IA is being remade, and when the Dashboard IA and Statement of Sufficiency can be published.
+      - Analyse costs and benefits relative to the status quo of no instrument, drawing on any earlier IA and engagement with the regulated community.
+      - Estimate the change in regulatory burden relative to no instrument. This change is not included in the Estimated Annual Impact on Regulatory Burden.
+    citations:
+      - {source: framework, section: "Special cases - Sunsetting legislative instruments", page: 19}
+      - {source: practical_guide, section: "Sunsetting legislative instruments", page: 21, page_end: 22}
+
+  - id: international_standards
+    title: Deviating from international standards
+    summary: >-
+      For proposals that meet the IA thresholds and would introduce a mandatory
+      standard that deviates from an existing international standard, a Detailed
+      IA is required.
+    requirements:
+      - The Detailed IA must explain why deviation is necessary and demonstrate that the benefits to the community outweigh the costs of deviating.
+    citations:
+      - {source: framework, section: "Special cases - Deviating from international standards", page: 19}
+      - {source: practical_guide, section: "Detailed IA: additional guidance", page: 12}
+
+  - id: treaties
+    title: International treaties and agreements
+    summary: >-
+      Where a treaty or agreement covers policy proposals that are in scope and
+      meet at least one IA threshold, the decision on the negotiation mandate
+      needs a draft IA, which is revised and finalised to support the decision to
+      agree to the final negotiated text.
+    requirements:
+      - A draft IA accompanies the request to approve formal commencement of negotiations.
+      - After the final text is settled, revise the IA; include it with the treaty text and National Interest Analysis or Explanatory Statement for the Joint Standing Committee on Treaties, and publish it on the OIA website.
+      - No further IA is needed for implementing legislation (attach the earlier IA to the Explanatory Memorandum or Statement), unless there is a choice between implementation options.
+    citations:
+      - {source: practical_guide, section: "International treaties and agreements", page: 22}
+
+  - id: evaluation
+    title: Evaluation
+    summary: >-
+      Agencies are expected to plan for evaluation as part of the IA process. A
+      Dashboard IA should identify whether an evaluation is planned and its
+      timing and type. A Detailed IA should consider whether a formal evaluation
+      should be undertaken and include either a clear monitoring plan or a
+      proportionate draft evaluation plan.
+    requirements:
+      - Finalise the monitoring and evaluation plan where required, collect relevant data and complete the evaluation by the proposed timeframe.
+      - Refer to the Australian Centre for Evaluation resources, including the Commonwealth Evaluation Policy.
+    citations:
+      - {source: practical_guide, section: "Evaluation", page: 23}
+
+  - id: ministers_meetings
+    title: Ministers' meetings and national standard setting bodies
+    summary: >-
+      The framework applies only to Australian Government decisions. Decisions of
+      National Cabinet, other Commonwealth-state ministers' meetings and national
+      standard setting bodies come under the Regulatory Impact Analysis Guide for
+      Ministers' Meetings and National Standard Setting Bodies.
+    requirements: []
+    citations:
+      - {source: framework, section: "Special cases - Regulatory Impact Analysis Guide for Ministers' Meetings and National Standard Setting Bodies", page: 19}
+      - {source: practical_guide, section: "Decision-making", page: 14}

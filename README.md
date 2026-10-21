@@ -33,7 +33,7 @@ five steps with **General advice** → run the **Self-assessment** → produce a
 | Phase | Scope | Status |
 |---|---|---|
 | 1 | App shell, project folders (local storage), Claude client, framework spec scaffold | Done |
-| 2 | Load Framework + Practical Guide PDFs, complete `content/framework_2026.yaml`, retrieval | Waiting on source PDFs |
+| 2 | Load Framework + Practical Guide PDFs, complete `content/framework_2026.yaml`, retrieval | Done |
 | 3 | General advice chat (grounded, cited, save to folder) | Planned |
 | 4 | Research (Claude web search → research brief) | Planned |
 | 5 | Self-assessment | Planned |
@@ -41,17 +41,25 @@ five steps with **General advice** → run the **Self-assessment** → produce a
 | 7 | Google Drive storage + Google sign-in | Planned |
 | 8 | Draft and export | Planned |
 
-The framework steps are currently summarised from the OIA website. Until they are checked
-against the source PDFs, the app flags them as not yet verified.
+`content/framework_2026.yaml` is checked against the four source documents. It holds the five
+steps, scope and the 3 IA thresholds, the 7 IA questions as worded in the Framework, the 26
+Self-Assessment Tool criteria (verbatim), the Regulatory Burden Estimation Tool defaults and
+method, and the special cases. Every entry has a citation (page for the PDFs, sheet and cell
+for the workbooks). The tests check the question and criterion wording against the source
+files. `core/retrieval.py` splits the two PDFs into passages by page and section and searches
+them with BM25 (`search(query, k)`).
 
 ## Source documents
 
-Put these in `reference_docs/oia_2026/`. The build environment can't fetch them from
-oia.pmc.gov.au, so they have to be added by hand:
+These are in `reference_docs/oia_2026/` (July 2026 versions, from the OIA website):
 
 - `impact-analysis-framework.pdf` — https://oia.pmc.gov.au/sites/default/files/2026-06/impact-analysis-framework.pdf
 - `impact-analysis-practical-guide.pdf` — https://oia.pmc.gov.au/sites/default/files/2026-06/impact-analysis-practical-guide.pdf
-- the Self-Assessment Tool and the Regulatory Burden Estimation Tool workbook from the OIA website
+- `impact-analysis-self-assessment-tool.xlsx` — Impact Analysis Self-Assessment Tool
+- `regulatory-burden-estimation-tool.xlsx` — Regulatory Burden Estimation Tool
+
+When OIA releases new versions, replace the files, update the YAML and run `pytest`: the
+wording tests will fail wherever the spec no longer matches the documents.
 
 Additional OIA guidance can go in `content/supplementary/`. The app labels it as
 supplementary, separate from the Framework.
