@@ -34,12 +34,16 @@ five steps with **General advice** → run the **Self-assessment** → produce a
 |---|---|---|
 | 1 | App shell, project folders (local storage), Claude client, framework spec scaffold | Done |
 | 2 | Load Framework + Practical Guide PDFs, complete `content/framework_2026.yaml`, retrieval | Done |
-| 3 | General advice chat (grounded, cited, save to folder) | Planned |
-| 4 | Research (Claude web search → research brief) | Planned |
-| 5 | Self-assessment | Planned |
-| 6 | Burden estimate (validated against the OIA RBE Tool) | Planned |
-| 7 | Google Drive storage + Google sign-in | Planned |
-| 8 | Draft and export | Planned |
+| 3 | General advice chat (grounded, cited, save to folder) | Built; not yet tried against the live API |
+| 4 | Research (Claude web search → research brief) | Built; not yet tried against the live API |
+| 5 | Self-assessment | Built; suggested ratings not yet tried against the live API |
+| 6 | Burden estimate (validated against the OIA RBE Tool) | Built; reproduces the tool's four worked examples |
+| 7 | Google Drive storage + Google sign-in | Built; needs a Google Cloud project to switch on |
+| 8 | Draft and export | Built; drafting not yet tried against the live API |
+
+The AI features are tested with Claude replaced by a fake (`tests/test_views.py`), so the page
+logic, saving and exports are checked, but the quality of Claude's output has not yet been
+reviewed on a real proposal.
 
 `content/framework_2026.yaml` is checked against the four source documents. It holds the five
 steps, scope and the 3 IA thresholds, the 7 IA questions as worded in the Framework, the 26
@@ -64,6 +68,27 @@ wording tests will fail wherever the spec no longer matches the documents.
 Additional OIA guidance can go in `content/supplementary/`. The app labels it as
 supplementary, separate from the Framework.
 
+## The tools
+
+- **General advice** — chat about the IA. Each question retrieves the most relevant passages
+  from the Framework and Practical Guide, and answers cite them by page. The project folder is
+  given to Claude as context. Conversations can be saved to `04_drafts`.
+- **Research** — Claude searches the web (Anthropic's server-side web search and fetch) and
+  writes a brief structured on IA questions 1 to 5. The source list is taken from the search
+  results themselves, not from Claude's text. Saved to `01_research`.
+- **Self-assessment** — the 26 criteria of the OIA Self-Assessment Tool, scored the way the
+  workbook scores them. Claude can suggest ratings from a draft IA. Saves the ratings, a gap
+  report and a completed copy of the OIA workbook to `02_self_assessment`.
+- **Burden estimate** — the OIA Regulatory Burden Estimation Tool's method and default labour
+  rates, year by year over the period of analysis, with a threshold 1 check. Claude can
+  suggest cost items from the project folder. Saves inputs, a summary and an `.xlsx` with an
+  Estimates sheet laid out like the OIA tool's. Recurring costs can start in year 1 or later,
+  which the tool's worked examples need.
+- **Draft and export** — drafts a Dashboard or Detailed IA section by section, structured on
+  the 7 IA questions, from everything in the project folder, with gap markers where
+  information is missing. Exports to Word (real heading styles, table header rows) with an
+  option to leave out the sections marked for removal before publication.
+
 ## Running locally
 
 ```bash
@@ -80,8 +105,29 @@ pytest
 | `ANTHROPIC_API_KEY` | Claude API key (required for the AI tools) |
 | `CLAUDE_MODEL`, `CLAUDE_MODEL_RESEARCH` | Optional model overrides (default `claude-opus-5-5`) |
 | `STORAGE_BACKEND` | `local` (default) or `gdrive` |
-| `DRIVE_ROOT_FOLDER_ID`, `[gcp_service_account]` | Google Drive storage (phase 7) |
-| `[auth]` | Google sign-in via `st.login` (phase 7) |
+| `DRIVE_ROOT_FOLDER_ID`, `[gcp_service_account]` | Google Drive storage |
+| `[auth]` | Google sign-in via `st.login`; each user then sees only their own projects |
+| `ALLOWED_EMAIL_DOMAINS` | Optional, e.g. `gov.au`: only these email domains may sign in |
+
+### Google Drive storage
+
+On Streamlit Community Cloud the app's disk is wiped when it restarts, so use Drive for real
+work.
+
+1. In Google Cloud, create a project, enable the Google Drive API, and create a service
+   account with a JSON key.
+2. Create a Drive folder for the projects (a shared drive works too) and share it with the
+   service account's email as an Editor.
+3. In the app's secrets set `STORAGE_BACKEND = "gdrive"`, `DRIVE_ROOT_FOLDER_ID` (the folder's
+   ID from its URL) and a `[gcp_service_account]` section with the key's fields.
+
+### Google sign-in
+
+1. In the same Google Cloud project, create an OAuth client (Web application) with the
+   redirect URI `https://<your-app>.streamlit.app/oauth2callback`.
+2. Add an `[auth]` section to the secrets (see `.streamlit/secrets.toml.example`).
+
+Without sign-in, everyone using the app sees the same projects.
 
 ## Data handling
 

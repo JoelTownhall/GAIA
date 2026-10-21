@@ -68,3 +68,14 @@ def test_rejects_unknown_folder(store):
 def test_rejects_project_id_traversal(store):
     with pytest.raises(ValueError):
         store.load_project("../etc")
+
+
+def test_email_domain_allowlist():
+    from core.ui import email_allowed
+
+    assert email_allowed("a@pmc.gov.au", "")
+    assert email_allowed("a@pmc.gov.au", "gov.au")
+    assert email_allowed("a@health.gov.au", "pmc.gov.au, health.gov.au")
+    assert not email_allowed("a@gmail.com", "gov.au")
+    assert not email_allowed("a@notgov.au", "gov.au")
+    assert not email_allowed("", "gov.au")

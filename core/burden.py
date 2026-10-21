@@ -273,3 +273,29 @@ def to_xlsx(inputs: BurdenInputs, result: BurdenResult) -> bytes:
     buf = io.BytesIO()
     wb.save(buf)
     return buf.getvalue()
+
+
+class BurdenSuggestion(BaseModel):
+    """Claude's first-cut cost items (structured output). Every number is an assumption."""
+
+    entities: float = Field(description="Number of entities affected, best estimate")
+    entities_basis: str = Field(description="Source or reasoning for the entity count")
+    administrative: list[AdminItem]
+    substantive: list[SubstantiveItem]
+    delay: list[DelayItem]
+    assumptions: str = Field(description="Basis for each number, one line per item, with sources")
+
+
+def rows_to_items(model: type[BaseModel], rows: list[dict]) -> list:
+    """Table rows from the editor to items, skipping blank rows and treating blanks as defaults."""
+    import math
+
+    items = []
+    for row in rows:
+        clean = {k: v for k, v in row.items()
+                 if v is not None and not (isinstance(v, float) and math.isnan(v)) and v != ""}
+        numbers = [v for k, v in clean.items() if isinstance(v, (int, float)) and k != "recurring_from_year"]
+        if not clean.get("description") and not any(numbers):
+            continue  # blank row
+        items.append(model.model_validate(clean))
+    return items

@@ -2,7 +2,7 @@
 import streamlit as st
 
 from core.project import Project
-from core.ui import current_user_email, page_footer, page_header, store
+from core.ui import auth_configured, current_user_email, page_footer, page_header, store
 
 page_header(
     "Projects",
@@ -12,6 +12,8 @@ page_header(
 )
 
 owner = current_user_email()
+if not auth_configured():
+    st.caption("Sign-in is not set up, so everyone using this copy of the app sees the same projects.")
 projects = store().list_projects(owner_email=owner)
 
 left, right = st.columns([3, 2], gap="large")

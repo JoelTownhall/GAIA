@@ -1,9 +1,10 @@
 """IA Navigator — entry point and navigation."""
 import streamlit as st
 
-from core.ui import APP_NAME, sidebar_project_badge
+from core.ui import APP_NAME, sidebar_project_badge, sidebar_sign_out, sign_in_gate
 
 st.set_page_config(page_title=APP_NAME, layout="wide", initial_sidebar_state="expanded")
+sign_in_gate()
 
 pages = {
     "Projects": [
@@ -24,4 +25,5 @@ pages = {
 
 nav = st.navigation(pages)
 sidebar_project_badge()
+sidebar_sign_out()
 nav.run()

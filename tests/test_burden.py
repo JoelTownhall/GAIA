@@ -112,3 +112,18 @@ def test_outputs_summary_and_workbook():
     est = wb["Estimates"]
     assert est["A9"].value.startswith("10 Year Total") and est["B9"].value == pytest.approx(24.0)
     assert est["B7"].value == pytest.approx(24_000_000)
+
+
+def test_rows_to_items_skips_blank_rows_and_nans():
+    from core.burden import rows_to_items
+
+    nan = float("nan")
+    rows = [
+        {"description": "Report", "ongoing_hours": 2.0, "frequency": 1.0, "cost_type": "Work-related",
+         "entities": nan, "people_per_entity": None, "setup_hours": nan, "recurring_from_year": 1},
+        {"description": None, "ongoing_hours": nan, "frequency": nan, "cost_type": None,
+         "entities": nan, "people_per_entity": nan, "setup_hours": nan, "recurring_from_year": nan},
+        {"description": "", "ongoing_hours": 0, "frequency": 0, "cost_type": "Work-related"},
+    ]
+    items = rows_to_items(AdminItem, rows)
+    assert len(items) == 1 and items[0].entities is None and items[0].setup_hours == 0
